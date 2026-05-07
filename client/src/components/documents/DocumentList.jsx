@@ -112,19 +112,17 @@ const DocumentList = ({ documents }) => {
                   <td className="py-4">
 
                     <a
-                      href={`http://localhost:5000${doc.path}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="
-                        bg-blue-600 text-white
-                        px-4 py-2 rounded-lg
-                        hover:bg-blue-700
-                        transition
-                        text-sm
-                      "
-                    >
-                      Download
-                    </a>
+                        href={`http://localhost:5000/api/documents/download/${doc._id}`}
+                        className="
+                            bg-blue-600 text-white
+                            px-4 py-2 rounded-lg
+                            hover:bg-blue-700
+                            transition
+                            text-sm
+                        "
+                        >
+                        Download
+                        </a>
 
                   </td>
 

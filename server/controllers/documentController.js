@@ -1,5 +1,5 @@
 import Document from "../models/Document.js";
-
+import path from "path";
 
 
 export const uploadDocuments = async (req, res) => {
@@ -48,6 +48,41 @@ export const getDocuments = async (req, res) => {
     res.json(documents);
 
   } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+
+// @desc Download document
+// @route GET /api/documents/download/:id
+export const downloadDocument = async (req, res) => {
+
+  try {
+
+    const document = await Document.findById(req.params.id);
+
+    if (!document) {
+      return res.status(404).json({
+        message: "Document not found",
+      });
+    }
+
+    // absolute file path
+   const filePath = path.join(
+  process.cwd(),
+  document.path
+);
+
+    // trigger download
+    res.download(
+      filePath,
+      document.originalName
+    );
+
+  } catch (error) {
+
     res.status(500).json({
       message: error.message,
     });

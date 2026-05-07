@@ -5,6 +5,7 @@ import upload from "../middleware/uploadMiddleware.js";
 import {
   uploadDocuments,
   getDocuments,
+  downloadDocument
 } from "../controllers/documentController.js";
 
 const router = express.Router();
@@ -25,6 +26,8 @@ router.post("/upload", (req, res) => {
   });
 
 });
+
+router.get("/download/:id", downloadDocument);
 
 
 // get all documents
