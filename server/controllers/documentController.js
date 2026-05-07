@@ -1,5 +1,8 @@
 import Document from "../models/Document.js";
 import path from "path";
+import Notification from "../models/Notification.js";
+
+import { getIO } from "../sockets/socket.js";
 
 
 export const uploadDocuments = async (req, res) => {
@@ -24,6 +27,23 @@ export const uploadDocuments = async (req, res) => {
     const savedDocuments = await Document.insertMany(
       documentsData
     );
+
+    // bulk upload notification
+if (savedDocuments.length > 3) {
+
+  const notification =
+    await Notification.create({
+      message:
+        `${savedDocuments.length} files uploaded successfully`,
+      type: "success",
+    });
+
+  // realtime emit
+  getIO().emit(
+    "new-notification",
+    notification
+  );
+}
 
     res.status(201).json({
       message: `${savedDocuments.length} file(s) uploaded successfully`,
