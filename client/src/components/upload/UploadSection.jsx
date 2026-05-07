@@ -1,7 +1,7 @@
 import { useState } from "react";
 import api from "../../api/axios";
 
-const UploadSection = () => {
+const UploadSection = ({ fetchDocuments }) => {
 
   const [uploads, setUploads] = useState([]);
 
@@ -62,6 +62,7 @@ const UploadSection = () => {
           status: "complete",
         }))
       );
+      await fetchDocuments();
 
     } catch (error) {
 

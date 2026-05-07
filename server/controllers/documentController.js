@@ -1,8 +1,7 @@
 import Document from "../models/Document.js";
 
 
-// @desc Upload documents
-// @route POST /api/documents/upload
+
 export const uploadDocuments = async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
@@ -11,7 +10,7 @@ export const uploadDocuments = async (req, res) => {
       });
     }
 
-    // prepare documents for database
+    
     const documentsData = req.files.map((file) => ({
       filename: file.filename,
       originalName: file.originalname,
@@ -21,7 +20,7 @@ export const uploadDocuments = async (req, res) => {
       status: "complete",
     }));
 
-    // save to mongodb
+  
     const savedDocuments = await Document.insertMany(
       documentsData
     );
@@ -39,8 +38,7 @@ export const uploadDocuments = async (req, res) => {
 };
 
 
-// @desc Get all documents
-// @route GET /api/documents
+
 export const getDocuments = async (req, res) => {
   try {
     const documents = await Document.find().sort({
