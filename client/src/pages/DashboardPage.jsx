@@ -4,6 +4,7 @@ import api from "../api/axios";
 
 import UploadSection from "../components/upload/UploadSection";
 import DocumentList from "../components/documents/DocumentList";
+import NotificationBell from "../components/notifications/NotificationBell";
 
 const DashboardPage = () => {
 
@@ -36,13 +37,15 @@ const DashboardPage = () => {
 
           <div>
             <h1 className="text-2xl font-bold text-blue-600">
-              DocuDash
+              DocHub
             </h1>
 
             <p className="text-sm text-slate-500">
               Document Management Dashboard
             </p>
           </div>
+          <NotificationBell />
+
 
         </div>
 
